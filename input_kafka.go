@@ -82,6 +82,8 @@ func (i *KafkaInput) ErrorHandler(consumer sarama.PartitionConsumer) {
 func (i *KafkaInput) Read(data []byte) (int, error) {
 	message := <-i.messages
 
+	// fmt.Println(string(message.Value))
+
 	if !i.config.useJSON {
 		copy(data, message.Value)
 		return len(message.Value), nil
